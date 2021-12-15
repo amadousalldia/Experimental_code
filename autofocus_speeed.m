@@ -18,15 +18,14 @@ for k=5:8
         file_name = sprintf('%s_%s_Sujet4_%s_N%d_H%s_%d_%d',...
             ACQ_TECHNIC, SECTION, ...
             BONE_TYPE, acq_seq, HEAD_POSITION, k, repet_numb);
-            FOC_QUAL_T = load([file_name '_foc_qual_speed.mat']);
-            MAP_TISS = FOC_QUAL_T.MAP_TISS;
+            FOC_QUAL = load([file_name '_foc_qual_speed.mat']);
+            MAP_TISS = FOC_QUAL.MAP_TISS;
             MAP_TISS=MAP_TISS(file_name);
             L1T(j) = MAP_TISS.TEST_VAL(MAP_TISS.intensity==max(MAP_TISS.intensity));
             L2T(j) = MAP_TISS.TEST_VAL(MAP_TISS.sharpness_NV==max(MAP_TISS.sharpness_NV));
             L3T(j) = MAP_TISS.TEST_VAL(MAP_TISS.sharpness_B==max(MAP_TISS.sharpness_B));
             
-            FOC_QUAL_B = load([file_name '_foc_qual_speed.mat']);
-            MAP_BONE = FOC_QUAL_B.MAP_BONE;
+            MAP_BONE = FOC_QUAL.MAP_BONE;
             MAP_BONE=MAP_BONE(file_name);
             L1B(j) = MAP_BONE.TEST_VAL(MAP_BONE.intensity==max(MAP_BONE.intensity));
             L2B(j) = MAP_BONE.TEST_VAL(MAP_BONE.sharpness_NV==max(MAP_BONE.sharpness_NV));
@@ -45,7 +44,10 @@ xline(8);
 xline(16);
 xline(24);
 ylim([min(MAP_TISS.TEST_VAL) max(MAP_TISS.TEST_VAL)])
-
+xticks([4 12 20 28])
+xticklabels([{'Distal(5)'} {'Distal(6)'} {'Proximal(7)'} {'Proximal(8)'}])
+title('Optimal speed of sound by diffferent image quality metrics in soft tissues',...
+    'Interpreter', 'latex')
 subplot 212,
 plot(L1B,'kd--'), hold on, plot(L2B, 'b+-.'), 
 plot(L3B,'r*:'), hold off
@@ -54,3 +56,7 @@ xline(8);
 xline(16);
 xline(24);
 ylim([min(MAP_BONE.TEST_VAL) max(MAP_BONE.TEST_VAL)])
+xticks([4 12 20 28])
+xticklabels([{'Distal(5)'} {'Distal(6)'} {'Proximal(7)'} {'Proximal(8)'}])
+title('Optimal speed of sound by diffferent image quality metrics in bone tissues',...
+    'Interpreter', 'latex')
