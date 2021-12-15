@@ -18,14 +18,14 @@ for k=5:8
         file_name = sprintf('%s_%s_Sujet4_%s_N%d_H%s_%d_%d',...
             ACQ_TECHNIC, SECTION, ...
             BONE_TYPE, acq_seq, HEAD_POSITION, k, repet_numb);
-            FOC_QUAL_T = load([file_name '_tiss_speed.mat']);
+            FOC_QUAL_T = load([file_name '_foc_qual_speed.mat']);
             MAP_TISS = FOC_QUAL_T.MAP_TISS;
             MAP_TISS=MAP_TISS(file_name);
             L1T(j) = MAP_TISS.TEST_VAL(MAP_TISS.intensity==max(MAP_TISS.intensity));
             L2T(j) = MAP_TISS.TEST_VAL(MAP_TISS.sharpness_NV==max(MAP_TISS.sharpness_NV));
             L3T(j) = MAP_TISS.TEST_VAL(MAP_TISS.sharpness_B==max(MAP_TISS.sharpness_B));
             
-            FOC_QUAL_B = load([file_name '_bone_speed.mat']);
+            FOC_QUAL_B = load([file_name '_foc_qual_speed.mat']);
             MAP_BONE = FOC_QUAL_B.MAP_BONE;
             MAP_BONE=MAP_BONE(file_name);
             L1B(j) = MAP_BONE.TEST_VAL(MAP_BONE.intensity==max(MAP_BONE.intensity));
